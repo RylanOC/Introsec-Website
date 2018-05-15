@@ -1,6 +1,5 @@
-# introsec
+# Website for Introsec Fall 2018 at Rensselaer Polytechnic Institute
 
-> Introsec Website
 
 ## Build Setup
 
