@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="dark">
+  <b-navbar toggleable="md" type="dark" variant="secondary">
 
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -18,8 +18,24 @@
         <b-dropdown-item href="#">Slides</b-dropdown-item>
         <b-dropdown-item href="https://rpis.ec/">RPISEC</b-dropdown-item>
       </b-nav-item-dropdown>
-      <b-nav-item href="#register" v-b-modal.modalPopover>Register</b-nav-item>
-      <b-nav-item href="#login" v-b-modal.modalPopover>Login</b-nav-item>
+      <b-nav-item >
+       <div>
+        <b-btn v-b-modal.loginModal>Login</b-btn>
+        <b-modal id="loginModal" title="Modal with Popover" ok-only>
+          <p>
+            This
+            <b-btn v-b-popover="'Popover inside a modal!'" title="Popover">
+              Button
+            </b-btn>
+            triggers a popover on click.
+          </p>
+          <p>
+            This <a href="#" v-b-tooltip title="Tooltip in a modal!">Link</a>
+            will show a tooltip on hover.
+          </p>
+        </b-modal>
+      </div>
+      </b-nav-item>
     </b-navbar-nav>
 
   </b-collapse>

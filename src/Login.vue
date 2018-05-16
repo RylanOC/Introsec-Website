@@ -1,50 +1,72 @@
 <template>
-<div>
-  <b-btn v-b-modal.modalPopover>Show Modal</b-btn>
-  <b-modal id="modalPopover" title="Modal with Popover" ok-only>
-    <p>
-      This
-      <b-btn v-b-popover="'Popover inside a modal!'" title="Popover">
-        Button
-      </b-btn>
-      triggers a popover on click.
-    </p>
-    <p>
-      This <a href="#" v-b-tooltip title="Tooltip in a modal!">Link</a>
-      will show a tooltip on hover.
-    </p>
-  </b-modal>
-</div>
+  <div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Auth0 - Vue</a>
 
-<!-- modal-popover.vue -->
+          <router-link :to="'/'"
+            class="btn btn-primary btn-margin">
+              Home
+          </router-link>
+
+          <button
+            class="btn btn-primary btn-margin"
+            v-if="!authenticated"
+            @click="login()">
+              Log In
+          </button>
+
+          <button
+            class="btn btn-primary btn-margin"
+            v-if="authenticated"
+            @click="logout()">
+              Log Out
+          </button>
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <router-view 
+        :auth="auth" 
+        :authenticated="authenticated">
+      </router-view>
+    </div>
+  </div>
 </template>
 
+<script>
+
+import AuthService from './Auth/AuthService'
+
+const auth = new AuthService()
+
+const { login, logout, authenticated, authNotifier } = auth
+
+export default {
+  name: 'app',
+  data () {
+    authNotifier.on('authChange', authState => {
+      this.authenticated = authState.authenticated
+    })
+    return {
+      auth,
+      authenticated
+    }
+  },
+  methods: {
+    login,
+    logout
+  }
+}
+</script>
 
 <style>
-#navbar {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
 </style>
+
+.btn-margin {
+  margin-top: 7px
+}
