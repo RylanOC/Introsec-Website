@@ -1,7 +1,12 @@
 <template>
+    <!--
     <div class="spinner">
         <img src="../assets/loading.svg" alt="loading"/>
     </div>
+    -->
+    <h1>
+        Callback
+    </h1>
 </template>
 
 

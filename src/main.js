@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import NavBar from './NavBar.vue'
 import Login from './Login.vue'
@@ -14,5 +15,6 @@ new Vue({
 
 new Vue({
   el: '#login',
+  router,
   render: h => h(Login)
 })

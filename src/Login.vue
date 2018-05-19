@@ -3,8 +3,6 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Auth0 - Vue</a>
-
           <router-link :to="'/'"
             class="btn btn-primary btn-margin">
               Home
@@ -46,7 +44,7 @@ const auth = new AuthService()
 const { login, logout, authenticated, authNotifier } = auth
 
 export default {
-  name: 'app',
+  name: 'login',
   data () {
     authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
