@@ -1,12 +1,8 @@
 <template>
-    <!--
     <div class="spinner">
         <img src="../assets/loading.svg" alt="loading"/>
     </div>
-    -->
-    <h1>
-        Callback
-    </h1>
+
 </template>
 
 
@@ -15,6 +11,8 @@ export default {
     name: 'callback',
     props: ['auth'],
     data () {
+        console.log('executing callback code')
+        console.log(this.auth)
         this.auth.handleAuthentication()
         return{}
     }

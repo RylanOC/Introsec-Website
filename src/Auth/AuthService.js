@@ -28,17 +28,18 @@ export default class AuthService {
 
     // parse URL for authentication hash
     handleAuthentication () {
-        this.auth0.parseHash((err, authResult ) => {
+        console.log('handleAuthentication')
+        this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                console.log('handleAuthentication')
-                this.setSession(authResult)
-                router.replace('home')
+              this.setSession(authResult)
+              console.log(authResult)
+              router.replace('home')
+            } else if (err) {
+              router.replace('home')
+              console.log(err)
+              alert(`Error: ${err.error}. Check the console for further details.`)
             }
-            else if (err) {
-                router.replace('home')
-                console.log(err)
-            }
-        })
+      })
     }
 
     // cache tokens
@@ -49,7 +50,7 @@ export default class AuthService {
         )
         localStorage.setItem('access_token', authResult.accessToken)
         localStorage.setItem('id_token', authResult.idToken)
-        localStorage.setItem('expires_at', authResult.expiresAt)
+        localStorage.setItem('expires_at', expiresAt)
         localStorage.setItem('authChange', {authenticated: true})
     }
 

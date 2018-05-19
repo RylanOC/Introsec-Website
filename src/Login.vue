@@ -46,6 +46,7 @@ const { login, logout, authenticated, authNotifier } = auth
 export default {
   name: 'login',
   data () {
+    console.log('executing login code')
     authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
     })
@@ -63,8 +64,8 @@ export default {
 
 <style>
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
-</style>
 
 .btn-margin {
   margin-top: 7px
 }
+</style>
