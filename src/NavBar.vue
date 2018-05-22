@@ -20,19 +20,9 @@
       </b-nav-item-dropdown>
       <b-nav-item >
        <div>
-        <b-btn v-b-modal.loginModal>Login</b-btn>
-        <b-modal id="loginModal" title="Modal with Popover" ok-only>
-          <p>
-            This
-            <b-btn v-b-popover="'Popover inside a modal!'" title="Popover">
-              Button
-            </b-btn>
-            triggers a popover on click.
-          </p>
-          <p>
-            This <a href="#" v-b-tooltip title="Tooltip in a modal!">Link</a>
-            will show a tooltip on hover.
-          </p>
+        <b-btn v-b-modal.loginModal v-on:click="login">Login</b-btn>
+        <b-modal id="loginModal" title="Log In" ok-only>
+         <div id="hiw-login-container"></div>
         </b-modal>
       </div>
       </b-nav-item>
@@ -42,6 +32,17 @@
 </b-navbar>
 </template>
 
+<script>
+var lock = require('./Auth/lock.js');
+
+export default {
+  methods: {
+    login: function() {
+        lock.show();
+      }
+  }
+}
+</script>
 
 <style>
 #navbar {

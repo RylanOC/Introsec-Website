@@ -17,10 +17,6 @@ const router = new Router({
       path: '/callback',
       name: 'Callback',
       component: Callback
-  },
-  {
-    path: '*',
-    redirect: '/home'
   }
   ]
 })
