@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Callback from '../components/Callback'
 import Home from '../components/Home'
 
 Vue.use(Router)
@@ -12,12 +11,7 @@ const router = new Router({
       path: '/home',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/callback',
-      name: 'Callback',
-      component: Callback
-  }
+    }
   ]
 })
 

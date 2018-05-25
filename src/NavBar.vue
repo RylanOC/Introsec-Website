@@ -10,21 +10,22 @@
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
 
-      <b-nav-item href="#">Home</b-nav-item>
-      <b-nav-item href="#">About</b-nav-item>
-      <b-nav-item href="#">Scoreboard</b-nav-item>
+      <b-nav-item href="/home">Home</b-nav-item>
+      <b-nav-item href="/about">About</b-nav-item>
+      <b-nav-item href="/challenges">Challenges</b-nav-item>
       <b-nav-item-dropdown text="Resources" right>
-        <b-dropdown-item href="#">Tools</b-dropdown-item>
-        <b-dropdown-item href="#">Slides</b-dropdown-item>
+        <b-dropdown-item href="/tools">Tools</b-dropdown-item>
+        <b-dropdown-item href="/slides">Slides</b-dropdown-item>
         <b-dropdown-item href="https://rpis.ec/">RPISEC</b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item >
-       <div>
-        <b-btn v-b-modal.loginModal v-on:click="login">Login</b-btn>
-        <b-modal id="loginModal" title="Log In" ok-only>
-         <div id="hiw-login-container"></div>
-        </b-modal>
-      </div>
+        <div v-if="this.authenticated" class="row">
+          <h5> Hello, {{ name }} </h5>
+          <b-btn v-on:click="logout">Logout</b-btn>
+        </div>
+        <div v-else>
+          <b-btn v-on:click="challenge">Login</b-btn>
+        </div>
       </b-nav-item>
     </b-navbar-nav>
 
@@ -33,15 +34,37 @@
 </template>
 
 <script>
-var lock = require('./Auth/lock.js');
 
-export default {
-  methods: {
-    login: function() {
-        lock.show();
+var lock= require('./Auth/lock.js');
+
+export default{
+  name: 'Navbar',
+  data: function () {
+    // update authentication state whenever an authChange event is emitted
+    lock.notifier.on('authChange', () => {
+      this.authenticated = lock.is_authenticated()
+      if (this.authenticated) {
+        this.name = lock.get_nick()
       }
+    })
+
+    return {
+      lock,
+      authenticated: false,
+      name: ''
+      
+    }
+  },
+  methods: {
+    challenge: function () {
+      lock.login()
+    },
+    logout: function () {
+      lock.logout()
+    }
   }
 }
+
 </script>
 
 <style>
