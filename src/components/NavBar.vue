@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" type="dark" variant="secondary">
+  <b-navbar toggleable="md" type="dark" variant="dark">
 
   <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -35,7 +35,7 @@
 
 <script>
 
-var lock= require('./Auth/lock.js');
+var lock= require('../Auth/lock.js');
 
 export default{
   name: 'Navbar',
