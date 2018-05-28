@@ -35,16 +35,16 @@
 
 <script>
 
-var lock= require('../Auth/lock.js');
+var lock = require('../Auth/lock.js')
 
 export default{
   name: 'Navbar',
   data: function () {
     // update authentication state whenever an authChange event is emitted
     lock.notifier.on('authChange', () => {
-      this.authenticated = lock.is_authenticated()
+      this.authenticated = lock.isAuthenticated()
       if (this.authenticated) {
-        this.name = lock.get_nick()
+        this.name = lock.getNick()
       }
     })
 
@@ -52,7 +52,6 @@ export default{
       lock,
       authenticated: false,
       name: ''
-      
     }
   },
   methods: {

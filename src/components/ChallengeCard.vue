@@ -1,10 +1,9 @@
 
-
 <template>
   <div>
-        <b-card 
+        <b-card
             v-if="solved"
-            v-bind="{ 
+            v-bind="{
             }"
                 bg-variant='success'
                 class="text-center"
@@ -12,9 +11,9 @@
             <h3 class="card-text"> {{ points }}</h3>
         </b-card>
 
-        <b-card 
+        <b-card
             v-else
-            v-bind="{ 
+            v-bind="{
             }"
                 bg-variant='light'
                 class="text-center"
@@ -22,7 +21,7 @@
             <h3 class="card-text"> {{ points }}</h3>
         </b-card>
 
-        <b-modal 
+        <b-modal
             v-model="show"
             v-bind="{title: name}">
             <b-container fluid>
@@ -30,8 +29,8 @@
             </b-container>
             <div slot="modal-footer" class="w-100">
                 <p class="float-left">Challenge by {{ author }}</p>
-                <b-btn size="sm" 
-                    class="float-right" 
+                <b-btn size="sm"
+                    class="float-right"
                     @click="
                     show=false">
                 Close
@@ -43,23 +42,17 @@
 
 <script>
 export default {
-    props: [
-        'points',
-        'catagory',
-        'name',
-        'hint',
-        'author',
-        'solved'
-        ],
+  props: [
+    'points',
+    'catagory',
+    'name',
+    'hint',
+    'author',
+    'solved'
+  ],
   data () {
     return {
-      //points: 0,
-      //catagory: '',
-      //name: '',
-      //hint: '',
-      //author: '',
-      //solved: false,
-      show: false,
+      show: false
     }
   }
 }
