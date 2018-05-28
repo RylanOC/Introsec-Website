@@ -1,4 +1,4 @@
-import EventEmitter from 'EventEmitter'
+var events = require('events')
 
 var AUTH_CONFIG = {
     clientId: 'hg9CdCL32KCltUgUb5PSAW590gnJSXkJ',
@@ -19,7 +19,7 @@ var options = {
 };
 
 const lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, options);
-var authNotifier = new EventEmitter()
+var authNotifier = new events.EventEmitter()
 var authenticated = false;
 var nick;
 

@@ -28,3 +28,7 @@ build/Release
 node_modules
 
 \.travis\.yml\.swp
+
+dist/
+
+distribution/
