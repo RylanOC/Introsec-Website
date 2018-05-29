@@ -10,9 +10,16 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
-Vue({
+const app = new Vue({
   el: '#app',
   router: router,
+  data: function () {
+    return {
+      junk: 'junk'
+    }
+  },
   components: { App },
   template: '<App/>'
 })
+
+app.junk = 'h*ck this linter'

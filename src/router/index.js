@@ -7,6 +7,10 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
+  build: {
+    assetsPublicPath: '/dist/'
+  },
+  base: '/dist/',
   routes: [
     {
       path: '/home',

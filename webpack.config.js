@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -28,8 +28,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
+          fallback: 'style-loader',
+          use: 'css-loader'
         })
       },
       {
@@ -54,7 +54,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  plugins: [new ExtractTextPlugin("main.css")],
+  plugins: [new ExtractTextPlugin('main.css')],
   devtool: '#eval-source-map'
 }
 
