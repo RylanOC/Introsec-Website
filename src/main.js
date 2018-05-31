@@ -22,4 +22,6 @@ const app = new Vue({
   template: '<App/>'
 })
 
+// The vue object must be captured in a variable,
+// but ESLint requires all declared variables be used.
 app.junk = 'h*ck this linter'
