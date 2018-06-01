@@ -18,6 +18,34 @@
 
 <script>
 import ChallengeCard from './ChallengeCard.vue'
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
+// returns all elements in a specified collection
+function dump_challenge_type(query_string){
+    dbo.collection(query_string).find({}).toArray(function(err, result) {
+    if (err) throw err;
+    var ret_val = result;
+    db.close();
+  });
+  return ret_val
+}
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  web_challenges = dump_challenge_type("web")
+  shell_challenges = dump_challenge_type("shell")
+  networking_challenges = dump_challenge_type("networking")
+  crypto_challenges = dump_challenge_type("crypto")
+  reverse_engineering_challenges = dump_challenge_type("reverse_engineering")
+  pwning_challenges = dump_challenge_type("pwning")
+  recon_challenges = dump_challenge_type("recon")
+  steganography_challenges = dump_challenge_type("steganography")
+  forensics_challenges = dump_challenge_type("forensics")
+  csaw_challenges = dump_challenge_type("csaw")
+  misc_challenges = dump_challenge_type("misc")
+  physical_challenges = dump_challenge_type("physical")
+}); 
 
 export default {
   name: 'challenges',
@@ -26,40 +54,18 @@ export default {
   },
   data () {
     return {
-      web_challenges: [
-        {
-          points: 5,
-          catagory: 'Web',
-          name: 'Find Flag',
-          hint: 'Find the flag hidden on this webpage!',
-          author: 'Milo',
-          solved: true
-        },
-        {
-          points: 10,
-          catagory: 'Web',
-          name: 'Javascript is Bad',
-          hint: 'Find the flag hidden on this webpage!\n(Looking at page source is cheating)',
-          author: 'Milo',
-          solved: false
-        },
-        {
-          points: 15,
-          catagory: 'Web',
-          name: 'Useragent Lock',
-          hint: 'This page has some kind of fingerprinting system to prevent unauthorized users from gaining access!\nCan you fool the system?',
-          author: 'Milo',
-          solved: false
-        },
-        {
-          points: 30,
-          catagory: 'Web',
-          name: 'Om nom nom',
-          hint: 'You must become an admin! But you don’t know the password!\nI wonder if there’s another way…',
-          author: 'Milo',
-          solved: false
-        }
-      ]
+      web_challenges,
+      shell_challenges,
+      networking_challenges,
+      crypto_challenges,
+      reverse_engineering_challenges,
+      pwning_challenges,
+      recon_challenges,
+      steganography_challenges,
+      forensics_challenges,
+      csaw_challenges,
+      misc_challenges,
+      physical_challenges
     }
   }
 }
