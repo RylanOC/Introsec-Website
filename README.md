@@ -3,9 +3,9 @@ A web app for the 2018-2019 Introsec club at RPI. This website hosts basic club 
 
 
 ## Setup Development Machine
-1. Clone the repo `git clone git@github.com:anaida07/MEVN-boilerplate.git`
+1. Clone the repo `git clone https://github.com/RylanOC/Introsec-Website.git`
 
-2. `cd MEVN-boilerplate`
+2. `cd Introsec-Website`
 
 3. Open client
 ```
