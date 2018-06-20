@@ -10,7 +10,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in webChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in webChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -28,7 +28,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in shellChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in shellChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -46,7 +46,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in networkingChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in networkingChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -64,7 +64,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in cryptoChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in cryptoChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -82,7 +82,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in reverseEngineeringChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in reverseEngineeringChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -100,7 +100,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in pwningChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in pwningChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -118,7 +118,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in reconChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in reconChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -136,7 +136,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in steganographyChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in steganographyChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -154,7 +154,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in forensicsChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in forensicsChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -172,7 +172,7 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in csawChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in csawChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
@@ -190,13 +190,14 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in miscChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in miscChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -208,13 +209,14 @@
                 <td>
                     <b-card-group deck class="mb-3">
                         <challenge-card
-                        v-for="challenge in physicalChallenges" :key="challenge.points"
+                        v-for="(challenge, index) in physicalChallenges" :key="index"
                         v-bind:points="challenge.points"
                         v-bind:catagory="challenge.catagory"
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -244,7 +246,7 @@ export default {
       reconChallenges: [],
       steganographyChallenges: [],
       forensicsChallenges: [],
-      CSAWChallenges: [],
+      csawChallenges: [],
       miscChallenges: [],
       physicalChallenges: []
     }
@@ -299,8 +301,8 @@ table {
 }
 
 table td {
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
+    border-left: 3px solid #2c3e50;
+    border-right: 1px solid #2c3e50;
 }
 
 table td:first-child {
@@ -311,8 +313,4 @@ table td:last-child {
     border-right: none;
 }
 
-/*container {
-    background-image:url(require);
-    background-position:center -75%
-}*/
 </style>

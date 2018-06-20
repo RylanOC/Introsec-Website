@@ -134,6 +134,21 @@ app.get('/physicalChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
+app.post('/check', (req, res) => {
+	var db = req.db;
+	var user_flag = req.body.user_flag;
+	var challenge_id = req.body.id;
+	
+	var diff = user_flag.localeCompare('test')
+	var match = false
+	if (diff == 0) {
+		match = true
+	}
+	res.send({
+		valid: match
+	})
+})
+
 app.get('/posts', (req, res) => {
   Post.find({}, 'title description', function (error, posts) {
 	  if (error) { console.error(error); }

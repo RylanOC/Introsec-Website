@@ -8,7 +8,8 @@ var challengeSchema = new mongoose.Schema(
     name: String,
     hint: String,
     author: String,
-    solved: Boolean
+    solved: Boolean,
+    _id: String
   },
   {
     collection: 'all'

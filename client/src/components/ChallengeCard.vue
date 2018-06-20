@@ -26,6 +26,7 @@
 
 <script>
 import swal from 'sweetalert2'
+import ChallengeService from '@/services/ChallengeService'
 
 export default {
   props: [
@@ -34,9 +35,20 @@ export default {
     'name',
     'hint',
     'author',
-    'solved'
+    'solved',
+    'id'
   ],
   methods: {
+    async checkFlag (flag) {
+      var response = await ChallengeService.verifyFlag({
+        id: 'abcdefg',
+        user_flag: flag
+      })
+      var valid = response.data.valid
+      console.log(valid)
+      this.$router.push({ name: 'Challenges' })
+      return valid
+    },
     show () {
       swal({
         title: this.name,
@@ -48,9 +60,11 @@ export default {
         showCancelButton: false,
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'Submit',
-        footer: 'Challenge by ' + this.author
-      }).then((result) => {
-        console.log('Submitted')
+        footer: 'Challenge by ' + this.author,
+        preConfirm: (flag) => {
+          console.log('user flag: ' + flag + ' id: ' + this.id)
+          this.checkFlag(flag)
+        }
       })
     }
   }

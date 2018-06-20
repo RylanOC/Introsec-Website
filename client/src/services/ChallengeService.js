@@ -36,6 +36,9 @@ export default {
   },
   fetchPhysicalChallenges () {
     return Api().get('physicalChallenges')
+  },
+  verifyFlag (params) {
+    return Api().post('check', params)
   }
 }
 
