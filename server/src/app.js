@@ -135,17 +135,22 @@ app.get('/physicalChallenges', (req, res) => {
 })
 
 app.post('/check', (req, res) => {
-	var db = req.db;
-	var user_flag = req.body.user_flag;
-	var challenge_id = req.body.id;
-	
-	var diff = user_flag.localeCompare('test')
-	var match = false
-	if (diff == 0) {
-		match = true
-	}
-	res.send({
-		valid: match
+	var user_flag = req.body.user_flag
+	var challenge_id = req.body._id
+	Challenge.findOne(
+		{_id: challenge_id},
+		'flag',
+		function (error, challenge) {
+			if (error) { console.error(error); }
+			var chal_flag = challenge.flag
+			var diff = user_flag.localeCompare(chal_flag)
+			var match = false
+			if (diff == 0) {
+				match = true
+			}
+			res.send({
+				valid: match,
+			})
 	})
 })
 

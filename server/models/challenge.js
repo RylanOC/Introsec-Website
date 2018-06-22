@@ -9,7 +9,8 @@ var challengeSchema = new mongoose.Schema(
     hint: String,
     author: String,
     solved: Boolean,
-    _id: String
+    flag: String,
+    _id: mongoose.Schema.Types.ObjectId
   },
   {
     collection: 'all'

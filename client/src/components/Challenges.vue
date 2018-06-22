@@ -16,7 +16,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -34,7 +35,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -52,7 +54,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -70,7 +73,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -88,7 +92,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -106,7 +111,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -124,7 +130,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -142,7 +149,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -160,7 +168,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 
@@ -178,7 +187,8 @@
                         v-bind:name="challenge.name"
                         v-bind:hint="challenge.hint"
                         v-bind:author="challenge.author"
-                        v-bind:solved="challenge.solved">
+                        v-bind:solved="challenge.solved"
+                        v-bind:id="challenge._id">
                         </challenge-card>
                     </b-card-group>
                 </td> 

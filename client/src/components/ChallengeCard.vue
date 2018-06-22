@@ -39,13 +39,13 @@ export default {
     'id'
   ],
   methods: {
-    async checkFlag (flag) {
+    async checkFlag (flag, id) {
       var response = await ChallengeService.verifyFlag({
-        id: 'abcdefg',
+        _id: id,
         user_flag: flag
       })
       var valid = response.data.valid
-      console.log(valid)
+      console.log('correct flag: ' + valid)
       this.$router.push({ name: 'Challenges' })
       return valid
     },
@@ -62,8 +62,8 @@ export default {
         confirmButtonText: 'Submit',
         footer: 'Challenge by ' + this.author,
         preConfirm: (flag) => {
-          console.log('user flag: ' + flag + ' id: ' + this.id)
-          this.checkFlag(flag)
+          console.log('user flag: ' + flag + ' id: ' + this.id + ' solved: ' + this.solved)
+          this.checkFlag(flag, this.id)
         }
       })
     }
