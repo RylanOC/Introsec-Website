@@ -12,6 +12,7 @@ const mongodb_conn_module = require('./mongodbConnModule');
 var db = mongodb_conn_module.connect();
 
 var Post = require("../models/post");
+var User = require("../models/user")
 var Challenge = require("../models/challenge");
 
 app.get('/webChallenges', (req, res) => {
@@ -151,6 +152,36 @@ app.post('/check', (req, res) => {
 			res.send({
 				valid: match,
 			})
+	})
+})
+
+app.post('/addUser', (req, res) => {
+	var db = req.db;
+	var new_user = new User({
+		email: req.body.email,
+		name: req.body.name,
+		nickname: req.body.nickname,
+		sub: req.body.sub,
+		updated_at: req.body.updated_at
+	})
+
+	new_user.save(function (error) {
+		if (error) {
+			console.log(error)
+		}
+		res.send({
+			success: true
+		})
+	})
+})
+
+app.get('/getUser', (req, res) => {
+	var db = req.db;
+	User.find({sub: req.params.sub}, 'name nickname updated_at', function (error, user) {
+	  if (error) { console.error(error); }
+	  res.send({
+		user: user
+	  })
 	})
 })
 
