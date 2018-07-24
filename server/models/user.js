@@ -7,6 +7,8 @@ var userSchema = new mongoose.Schema(
     name: String,
     nickname: String,
     sub: String,
+    points: Number,
+    solved: [],
     updated_at: Date
   },
   {

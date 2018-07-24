@@ -26,16 +26,28 @@ var authNotifier = new events.EventEmitter()
 var authenticated = false
 var name
 
+// create a local database entry for user if they don't already exist
+// otherwise return existing entry
 async function updateDB (profile) {
-  // assuming user is not in database for testing purposes
-  var success = await UserService.addUser({
-    email: profile.email,
-    name: profile.name,
-    nickname: profile.nickname,
-    sub: profile.sub,
-    updated_at: profile.updated_at
+  var user = await UserService.getUser({
+    sub: profile.sub
   })
-  console.log(success)
+
+  console.log(user.data.user)
+  console.log('found: ' + user.data.found)
+
+  // if the user is new, add them to database so we can track points
+  if (!user.data.found) {
+    await UserService.addUser({
+      email: profile.email,
+      name: profile.name,
+      nickname: profile.nickname,
+      sub: profile.sub,
+      points: 0,
+      solved: [],
+      updated_at: profile.updated_at
+    })
+  }
 }
 
 // Listening for the authenticated event
@@ -50,8 +62,7 @@ lock.on('authenticated', function (authResult) {
     localStorage.setItem('accessToken', authResult.accessToken)
     localStorage.setItem('profile', JSON.stringify(profile))
 
-    var sucsess = updateDB(profile)
-    console.log(sucsess.success)
+    updateDB(profile)
 
     name = profile.nickname
     authenticated = true

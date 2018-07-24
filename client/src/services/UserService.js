@@ -6,6 +6,6 @@ export default {
   },
 
   getUser (params) {
-    return Api().get('getUser', params.id)
+    return Api().get('getUser/' + params.sub)
   }
 }

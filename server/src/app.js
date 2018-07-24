@@ -175,12 +175,17 @@ app.post('/addUser', (req, res) => {
 	})
 })
 
-app.get('/getUser', (req, res) => {
+app.get('/getUser/:sub', function (req, res) {
 	var db = req.db;
-	User.find({sub: req.params.sub}, 'name nickname updated_at', function (error, user) {
-	  if (error) { console.error(error); }
+	User.findOne({sub:  req.params.sub}, 'email name nickname sub points solved updated_at', function (error, userFound) {
+		if (error) { console.error(error); }
+		var userExists = true
+		if (!userFound) {
+			userExists = false
+		}
 	  res.send({
-		user: user
+			user: userFound,
+			found: userExists
 	  })
 	})
 })
