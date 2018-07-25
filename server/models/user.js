@@ -1,6 +1,13 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
+var solveSchema = new mongoose.Schema(
+  {
+    id: String,
+    points: Number
+  }
+)
+
 var userSchema = new mongoose.Schema(
   {
     email: String,
@@ -8,7 +15,7 @@ var userSchema = new mongoose.Schema(
     nickname: String,
     sub: String,
     points: Number,
-    solved: [],
+    solved: [ solveSchema ],
     updated_at: Date
   },
   {

@@ -140,17 +140,30 @@ app.post('/check', (req, res) => {
 	var challenge_id = req.body._id
 	Challenge.findOne(
 		{_id: challenge_id},
-		'flag',
+		'flag points',
 		function (error, challenge) {
 			if (error) { console.error(error); }
 			var chal_flag = challenge.flag
 			var diff = user_flag.localeCompare(chal_flag)
-			var match = false
 			if (diff == 0) {
-				match = true
+				var award = {
+					'id': challenge_id,
+					'points': challenge.points
+				}
+				console.log(award)
+				// insert award into 'solved' array
+				User.findOneAndUpdate(
+					{sub: 'google-oauth2|111328328548956371407'}, 
+					{$addToSet: {solved: challenge}},
+					{safe: true, upsert: true},
+					function(err, model) {
+							console.log(err);
+					}
+				)
 			}
+
 			res.send({
-				valid: match,
+				valid: diff,
 			})
 	})
 })
