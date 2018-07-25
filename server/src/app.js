@@ -150,10 +150,9 @@ app.post('/check', (req, res) => {
 					'id': challenge_id,
 					'points': challenge.points
 				}
-				console.log(award)
 				// insert award into 'solved' array
 				User.findOneAndUpdate(
-					{sub: 'google-oauth2|111328328548956371407'}, 
+					{sub: req.body.user_id}, 
 					{$addToSet: {solved: challenge}},
 					{safe: true, upsert: true},
 					function(err, model) {
