@@ -239,6 +239,7 @@
 <script>
 import ChallengeCard from './ChallengeCard.vue'
 import ChallengeService from '@/services/ChallengeService'
+import UserService from '@/services/UserService'
 
 export default {
   name: 'challenges',
@@ -291,20 +292,102 @@ export default {
       this.miscChallenges = response.data.miscChallenges
       response = await ChallengeService.fetchPhysicalChallenges()
       this.physicalChallenges = response.data.physicalChallenges
+      this.getSolved()
+    },
+
+    // gets a list of challenges solved by current user
+    // modifies local challenge array to force challenge cards to update
+    async getSolved () {
+      var user = JSON.parse(localStorage.getItem('profile'))
+      console.log(user)
+      var solved = await UserService.getSolved({
+        user_id: user.sub
+      })
+      solved = solved.data.solved
+      // for each challenge, update the corresponding card so solved = true
+      var index
+      for (var i = 0; i < solved.length; i++) {
+        switch (solved[i].category) {
+          case 'Web':
+            index = this.webChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.webChallenges[index].solved = true
+            break
+          case 'Shell':
+            index = this.shellChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.shellChallenges[index].solved = true
+            break
+          case 'Networking':
+            index = this.networkingChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.networkingChallenges[index].solved = true
+            break
+          case 'Crypto':
+            index = this.cryptoChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.cryptoChallenges[index].solved = true
+            break
+          case 'Reverse Engineering':
+            index = this.reverseEngineeringChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.reverseEngineeringChallenges[index].solved = true
+            break
+          case 'Pwning':
+            index = this.pwningChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.pwningChallenges[index].solved = true
+            break
+          case 'Recon':
+            index = this.reconChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.reconChallenges[index].solved = true
+            break
+          case 'Steganography':
+            index = this.steganographyChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.steganographyChallenges[index].solved = true
+            break
+          case 'Forensics':
+            index = this.forensicsChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.forensicsChallenges[index].solved = true
+            break
+          case 'CSAW':
+            index = this.csawChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.csawChallenges[index].solved = true
+            break
+          case 'Misc':
+            index = this.miscChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.miscChallenges[index].solved = true
+            break
+          case 'Physical':
+            index = this.physicalChallenges.map(
+                function (obj) { return obj._id }
+            ).indexOf(solved[i]._id)
+            this.physicalChallenges[index].solved = true
+            break
+        }
+      }
     }
   }
 }
 </script>
 
 <style>
-h2{
-    color: #dfdfd5;
-}
-
-.container {
-    background: #27282A
-}
-
 table {
     border:none;
     border-collapse: collapse;
@@ -323,4 +406,7 @@ table td:last-child {
     border-right: none;
 }
 
+h3 {
+    color: #2c3e50
+}
 </style>

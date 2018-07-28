@@ -7,5 +7,9 @@ export default {
 
   getUser (params) {
     return Api().get('getUser/' + params.sub)
+  },
+
+  async getSolved (params) {
+    return Api().get('getSolved/' + params.user_id)
   }
 }
