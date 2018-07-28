@@ -45,7 +45,7 @@ app.get('/networkingChallenges', (req, res) => {
 })
 
 app.get('/cryptoChallenges', (req, res) => {
-	Challenge.find({category: 'Crypto'}, 
+	Challenge.find({category: 'Crytpo'}, 
 		function (error, crypto_challenges) {
 	  if (error) { console.error(error); }
 	  res.send({
