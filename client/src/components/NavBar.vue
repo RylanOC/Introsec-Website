@@ -20,7 +20,6 @@
       </b-nav-item-dropdown>
       <b-nav-item >
         <div v-if="this.authenticated" class="row">
-          <h5> Hello, {{ name }} </h5>
           <b-btn v-on:click="logout">Logout</b-btn>
         </div>
         <div v-else>
@@ -36,21 +35,16 @@
 <script>
 var lock = require('../Auth/lock.js')
 
-export default{
+export default {
   name: 'Navbar',
   data: function () {
-    // update authentication state whenever an authChange event is emitted
     lock.notifier.on('authChange', () => {
-      this.authenticated = lock.isAuthenticated()
-      if (this.authenticated) {
-        this.name = lock.getNick()
-      }
+      this.updateAuthStatus()
     })
-
     return {
+      user: null,
       lock,
-      authenticated: false,
-      name: ''
+      authenticated: false
     }
   },
   methods: {
@@ -59,7 +53,18 @@ export default{
     },
     logout: function () {
       lock.logout()
+    },
+    updateAuthStatus: function () {
+      this.user = localStorage.getItem('profile')
+      if (typeof this.user !== 'undefined' && this.user != null) {
+        this.authenticated = true
+      } else {
+        this.authenticated = false
+      }
     }
+  },
+  mounted () {
+    this.updateAuthStatus()
   }
 }
 

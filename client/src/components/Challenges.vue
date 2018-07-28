@@ -240,6 +240,7 @@
 import ChallengeCard from './ChallengeCard.vue'
 import ChallengeService from '@/services/ChallengeService'
 import UserService from '@/services/UserService'
+var lock = require('../Auth/lock.js')
 
 export default {
   name: 'challenges',
@@ -247,6 +248,10 @@ export default {
     'challenge-card': ChallengeCard
   },
   data () {
+    // if a user logs in while on challenges page, update solved list
+    lock.notifier.on('authChange', () => {
+      this.getSolved()
+    })
     return {
       webChallenges: [],
       shellChallenges: [],
