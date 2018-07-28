@@ -153,13 +153,18 @@ app.post('/check', (req, res) => {
 				User.findOneAndUpdate(
 					{sub: req.body.user_id}, 
 					{$addToSet: {solved: challenge}},
-					{safe: true, upsert: true},
-					function(err, model) {
-							console.log(err);
+					{fields: 'solved', new: true},
+					function(err, success) {
+							if (err) {
+								console.log(err);
+							}
+						  console.log('solved: ' + success);
 					}
-				)
+				).then(function () {
+					console.log('DONE WITH CHECK FLAG')
+					console.log('---------------------------------------------------')		
+				})
 			}
-
 			res.send({
 				valid: diff,
 			})
@@ -204,9 +209,14 @@ app.get('/getUser/:sub', function (req, res) {
 // returns a list of challenge objects that a given user has solved
 app.get('/getSolved/:user_id', function(req, res) {
 	var db = req.db
+	console.log('')
+	console.log('')
+	console.log('starting get user')
 	User.findOne({sub: req.params.user_id}, 'solved', function (error, user) {
 		if (error) { console.log(error) }
 
+		console.log('got user :' + user)
+		
 		// only continue if a valid user is found
 		if (user) {
 			// create list of challenge objects which have been solved
@@ -214,7 +224,9 @@ app.get('/getSolved/:user_id', function(req, res) {
 			for (var i = 0; i < user.solved.length; i++) {
 				Challenge.findOne({_id: user.solved[i]._id}, function (error, challenge){
 					if (error) {console.log(error)}
+					console.log('finding challenge')
 				}).then(function (challenge) {
+					console.log('found challenge: ' + challenge)
 					solved.push(challenge)
 					// SUPER JANKY way of making sure the list is complete before returning it
 					if (solved.length === user.solved.length) {

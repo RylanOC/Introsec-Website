@@ -46,7 +46,9 @@ export default {
         user_id: sub
       })
       var valid = response.data.valid
-      this.$router.push({ name: 'Challenges' })
+      if (valid === 0) {
+        this.$parent.$emit('recalculate_solved')
+      }
       return valid
     },
     show () {

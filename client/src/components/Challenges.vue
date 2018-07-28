@@ -264,6 +264,9 @@ export default {
   },
   mounted () {
     this.getChallenges()
+    this.$on('recalculate_solved', () => {
+      this.getSolved()
+    })
   },
   methods: {
     async getChallenges () {
@@ -299,7 +302,6 @@ export default {
     // modifies local challenge array to force challenge cards to update
     async getSolved () {
       var user = JSON.parse(localStorage.getItem('profile'))
-      console.log(user)
       var solved = await UserService.getSolved({
         user_id: user.sub
       })
