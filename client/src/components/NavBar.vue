@@ -10,12 +10,11 @@
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
 
-      <b-nav-item href="/home">Home</b-nav-item>
-      <b-nav-item href="/about">About</b-nav-item>
+      <b-nav-item href="/">Home</b-nav-item>
+      <b-nav-item href="https://drive.google.com/open?id=1VsJ_529IsNrxEjNdD_HyRJjYcD4USRTG">Slides</b-nav-item>
       <b-nav-item href="/challenges">Challenges</b-nav-item>
       <b-nav-item-dropdown text="Resources" right>
         <b-dropdown-item href="/tools">Tools</b-dropdown-item>
-        <b-dropdown-item href="/slides">Slides</b-dropdown-item>
         <b-dropdown-item href="https://rpis.ec/">RPISEC</b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item >
