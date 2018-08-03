@@ -9,7 +9,7 @@ const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
-app.use(require('helmet'()))
+app.use(require('helmet')())
 
 const mongodb_conn_module = require('./mongodbConnModule');
 var db = mongodb_conn_module.connect();
@@ -152,7 +152,7 @@ app.post('/check', (req, res) => {
 					'id': challenge_id,
 					'points': challenge.points
 				}
-				// insert award into 'solved' array
+				// if the flags match, insert the challenge into the user's 'solved' array
 				User.findOneAndUpdate(
 					{sub: req.body.user_id}, 
 					{$addToSet: {solved: challenge}},

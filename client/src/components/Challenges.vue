@@ -309,9 +309,8 @@ export default {
       var user = JSON.parse(localStorage.getItem('profile'))
 
       // ensure user is logged in before we continue
-      if (typeof user === null) {
-          console.log('No user is logged in!')
-          return
+      if (!user) {
+        return
       }
 
       var solved = await UserService.getSolved({

@@ -16,6 +16,7 @@
       <b-nav-item-dropdown text="Resources" right>
         <b-dropdown-item href="/tools">Tools</b-dropdown-item>
         <b-dropdown-item href="https://rpis.ec/">RPISEC</b-dropdown-item>
+        <b-dropdown-item href="https://introsec.backdrifting.net">Original Introsec</b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item >
         <div v-if="this.authenticated" class="row">
