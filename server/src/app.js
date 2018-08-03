@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const https = require('https')
+const fs = require('fs')
 
 const app = express()
 app.use(morgan('combined'))
@@ -13,6 +15,12 @@ var db = mongodb_conn_module.connect();
 
 var User = require("../models/user")
 var Challenge = require("../models/challenge");
+
+// load cert + private key so we can serve our app over https
+const options = {
+	cert: fs.readFileSync('/etc/letsencrypt/live/rylan.party/fullchain.pem'),
+	key: fs.readFileSync('/etc/letsencrypt/live/rylan.party/privkey.pem')
+}
 
 app.get('/webChallenges', (req, res) => {
 	Challenge.find({category: 'Web'}, 
@@ -241,3 +249,4 @@ app.get('/getSolved/:user_id', function(req, res) {
 })
 
 app.listen(process.env.PORT || 8081)
+https.createServer(options, app).listen(8443)
