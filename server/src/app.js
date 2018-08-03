@@ -9,6 +9,7 @@ const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
+app.use(require('helmet'()))
 
 const mongodb_conn_module = require('./mongodbConnModule');
 var db = mongodb_conn_module.connect();
@@ -16,13 +17,7 @@ var db = mongodb_conn_module.connect();
 var User = require("../models/user")
 var Challenge = require("../models/challenge");
 
-// load cert + private key so we can serve our app over https
-const options = {
-	cert: fs.readFileSync('/etc/letsencrypt/live/rylan.party/fullchain.pem'),
-	key: fs.readFileSync('/etc/letsencrypt/live/rylan.party/privkey.pem')
-}
-
-app.get('/webChallenges', (req, res) => {
+app.get('/webchallenges', (req, res) => {
 	Challenge.find({category: 'Web'}, 
 		function (error, web_challenges) {
 	  if (error) { console.error(error); }
@@ -32,7 +27,7 @@ app.get('/webChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/shellChallenges', (req, res) => {
+app.get('/shellchallenges', (req, res) => {
 	Challenge.find({category: 'Shell'}, 
 		function (error, shell_challenges) {
 	  if (error) { console.error(error); }
@@ -42,7 +37,7 @@ app.get('/shellChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/networkingChallenges', (req, res) => {
+app.get('/networkingchallenges', (req, res) => {
 	Challenge.find({category: 'Networking'}, 
 		function (error, networking_challenges) {
 	  if (error) { console.error(error); }
@@ -52,7 +47,7 @@ app.get('/networkingChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/cryptoChallenges', (req, res) => {
+app.get('/cryptochallenges', (req, res) => {
 	Challenge.find({category: 'Crytpo'}, 
 		function (error, crypto_challenges) {
 	  if (error) { console.error(error); }
@@ -62,7 +57,7 @@ app.get('/cryptoChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/reverseEngineeringChallenges', (req, res) => {
+app.get('/reverseengineeringchallenges', (req, res) => {
 	Challenge.find({category: 'Reverse Engineering'}, 
 		function (error, reverse_engineering_challenges) {
 	  if (error) { console.error(error); }
@@ -72,7 +67,7 @@ app.get('/reverseEngineeringChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/pwningChallenges', (req, res) => {
+app.get('/pwningchallenges', (req, res) => {
 	Challenge.find({category: 'Pwning'}, 
 		function (error, pwning_challenges) {
 	  if (error) { console.error(error); }
@@ -82,7 +77,7 @@ app.get('/pwningChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/reconChallenges', (req, res) => {
+app.get('/reconchallenges', (req, res) => {
 	Challenge.find({category: 'Recon'}, 
 		function (error, recon_challenges) {
 	  if (error) { console.error(error); }
@@ -92,7 +87,7 @@ app.get('/reconChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/steganographyChallenges', (req, res) => {
+app.get('/steganographychallenges', (req, res) => {
 	Challenge.find({category: 'Steganography'}, 
 		function (error, steganography_challenges) {
 	  if (error) { console.error(error); }
@@ -102,7 +97,7 @@ app.get('/steganographyChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/forensicsChallenges', (req, res) => {
+app.get('/forensicschallenges', (req, res) => {
 	Challenge.find({category: 'Forensics'}, 
 		function (error, forensics_challenges) {
 	  if (error) { console.error(error); }
@@ -112,7 +107,7 @@ app.get('/forensicsChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/CSAWChallenges', (req, res) => {
+app.get('/csawchallenges', (req, res) => {
 	Challenge.find({category: 'CSAW'}, 
 		function (error, csaw_challenges) {
 	  if (error) { console.error(error); }
@@ -122,7 +117,7 @@ app.get('/CSAWChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/miscChallenges', (req, res) => {
+app.get('/miscchallenges', (req, res) => {
 	Challenge.find({category: 'Misc'}, 
 		function (error, misc_challenges) {
 	  if (error) { console.error(error); }
@@ -132,7 +127,7 @@ app.get('/miscChallenges', (req, res) => {
 	}).sort({_id:1})
 })
 
-app.get('/physicalChallenges', (req, res) => {
+app.get('/physicalchallenges', (req, res) => {
 	Challenge.find({category: 'Physical'}, 
 		function (error, physical_challenges) {
 	  if (error) { console.error(error); }
@@ -179,7 +174,7 @@ app.post('/check', (req, res) => {
 	})
 })
 
-app.post('/addUser', (req, res) => {
+app.post('/adduser', (req, res) => {
 	var db = req.db;
 	var new_user = new User({
 		email: req.body.email,
@@ -199,7 +194,7 @@ app.post('/addUser', (req, res) => {
 	})
 })
 
-app.get('/getUser/:sub', function (req, res) {
+app.get('/getuser/:sub', function (req, res) {
 	var db = req.db;
 	User.findOne({sub:  req.params.sub}, 'email name nickname sub points solved updated_at', function (error, userFound) {
 		if (error) { console.error(error); }
@@ -215,7 +210,7 @@ app.get('/getUser/:sub', function (req, res) {
 })
 
 // returns a list of challenge objects that a given user has solved
-app.get('/getSolved/:user_id', function(req, res) {
+app.get('/getsolved/:user_id', function(req, res) {
 	var db = req.db
 	console.log('')
 	console.log('')
@@ -247,6 +242,15 @@ app.get('/getSolved/:user_id', function(req, res) {
 		}
 	}) 
 })
+
+// load cert + private key so we can serve our app over https
+// (assumes cert files are in /server/cert)
+var fullchain = fs.readFileSync('./cert/fullchain.pem')
+var privkey = fs.readFileSync('./cert/privkey.pem')
+const options = {
+	cert: fullchain,
+	key: privkey 
+}
 
 app.listen(process.env.PORT || 8081)
 https.createServer(options, app).listen(8443)
