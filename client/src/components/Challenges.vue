@@ -233,6 +233,7 @@
             </tr>
         </tbody>
     </table>
+    <p> Flags will always be obvious once identified, and will usually be in the form: flag{sUp3r_5ecret_f1ag} </p>
   </div>
 </template>
 

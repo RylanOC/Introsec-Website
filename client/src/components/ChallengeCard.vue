@@ -54,7 +54,7 @@ export default {
     show () {
       swal({
         title: this.name,
-        text: this.hint,
+        html: this.hint,
         input: 'text',
         inputAttributes: {
           autocapitalize: 'off'
