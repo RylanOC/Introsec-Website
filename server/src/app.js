@@ -11,6 +11,9 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(require('helmet')())
 
+// serve static content for challenges/etc.
+app.use(express.static('media')) // logo
+
 const mongodb_conn_module = require('./mongodbConnModule');
 var db = mongodb_conn_module.connect();
 

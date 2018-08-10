@@ -6,17 +6,11 @@ var events = require('events')
 var AUTH_CONFIG = {
   clientId: 'hg9CdCL32KCltUgUb5PSAW590gnJSXkJ',
   domain: 'introsec.auth0.com',
-  callbackUrl: 'http://localhost:8080/callback',
+  callbackUrl: 'https:/rylan.party/callback',
   apiUrl: 'https://introsec.auth0.com/api/v2/'
 }
 
 var options = {
-  theme: {
-    logo: 'src/assets/introsec.png'
-  },
-  auth: {
-    redirect: false
-  },
   autofocus: true,
   autoclose: true
 }
@@ -82,9 +76,13 @@ export function login () {
 }
 
 export function logout () {
-  lock.logout()
   authenticated = false
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('profile')
   authNotifier.emit('authChange')
+  lock.logout({
+    returnTo: 'https://rylan.party'
+  })
 }
 
 export function getNick () {

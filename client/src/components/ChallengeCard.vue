@@ -45,6 +45,7 @@ export default {
         user_flag: flag,
         user_id: sub
       })
+
       var valid = response.data.valid
       if (valid === 0) {
         this.$parent.$emit('recalculate_solved')
@@ -52,22 +53,46 @@ export default {
       return valid
     },
     show () {
-      swal({
-        title: this.name,
-        html: this.hint,
-        input: 'text',
-        inputAttributes: {
-          autocapitalize: 'off'
-        },
-        showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Submit',
-        footer: 'Challenge by ' + this.author,
-        preConfirm: (flag) => {
-          var user = JSON.parse(localStorage.getItem('profile'))
-          this.checkFlag(flag, this.id, user.sub)
-        }
-      })
+      var authenticated = false
+      var user = localStorage.getItem('profile')
+      if (typeof user !== 'undefined' && user != null) {
+        authenticated = true
+      }
+
+      if (authenticated) {
+        swal({
+          title: this.name,
+          html: this.hint,
+          input: 'text',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Submit',
+          footer: 'Challenge by ' + this.author,
+          preConfirm: (flag) => {
+            var user = JSON.parse(localStorage.getItem('profile'))
+            this.checkFlag(flag, this.id, user.sub)
+          }
+        })
+      } else {
+        swal({
+          title: this.name,
+          html: this.hint,
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Submit',
+          footer: 'Challenge by ' + this.author,
+          preConfirm: (flag) => {
+            var user = JSON.parse(localStorage.getItem('profile'))
+            this.checkFlag(flag, this.id, user.sub)
+          }
+        })
+      }
     }
   }
 }

@@ -1,6 +1,12 @@
 <template>
   <div class="container">
     <br>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="authenticated">
+        <strong>It looks like you're not logged in.</strong> Without logging in, you won't be able to solve any challenges.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
       <table cellpadding="10">
         <tbody>
             <tr>
@@ -81,7 +87,7 @@
             </tr>
             <tr>
                 <td style="width: 10%">
-                    <h2 style="text-align: right">Reverse Engineering</h2>
+                    <h2 style="text-align: right">Reversing</h2>
                 </td>
                 <td>
                     <b-card-group deck class="mb-3">
@@ -138,7 +144,7 @@
             </tr>
             <tr>
                 <td style="width: 10%">
-                    <h2 style="text-align: right">Steganography</h2>
+                    <h2 style="text-align: right">Stego</h2>
                 </td>
                 <td>
                     <b-card-group deck class="mb-3">
@@ -265,7 +271,8 @@ export default {
       forensicsChallenges: [],
       csawChallenges: [],
       miscChallenges: [],
-      physicalChallenges: []
+      physicalChallenges: [],
+      authenticated: false
     }
   },
   mounted () {
@@ -273,6 +280,11 @@ export default {
     this.$on('recalculate_solved', () => {
       this.getSolved()
     })
+
+    var user = localStorage.getItem('profile')
+    if (typeof user !== 'undefined' && user != null) {
+      this.authenticated = true
+    }
   },
   methods: {
     async getChallenges () {
