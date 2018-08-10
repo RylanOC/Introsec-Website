@@ -81,7 +81,7 @@
             </tr>
             <tr>
                 <td style="width: 10%">
-                    <h2 style="text-align: right">Reverse Engineering</h2>
+                    <h2 style="text-align: right">Reversing</h2>
                 </td>
                 <td>
                     <b-card-group deck class="mb-3">
@@ -138,7 +138,7 @@
             </tr>
             <tr>
                 <td style="width: 10%">
-                    <h2 style="text-align: right">Steganography</h2>
+                    <h2 style="text-align: right">Stego</h2>
                 </td>
                 <td>
                     <b-card-group deck class="mb-3">
