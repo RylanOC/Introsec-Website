@@ -59,6 +59,7 @@ export default {
         authenticated = true
       }
 
+      // If the user is logged in, give them a field to submit a flag
       if (authenticated) {
         swal({
           title: this.name,
@@ -76,6 +77,7 @@ export default {
             this.checkFlag(flag, this.id, user.sub)
           }
         })
+      // If the user is not logged in, show an alert with no button/field
       } else {
         swal({
           title: this.name,
@@ -85,12 +87,7 @@ export default {
           },
           showCancelButton: false,
           confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Submit',
-          footer: 'Challenge by ' + this.author,
-          preConfirm: (flag) => {
-            var user = JSON.parse(localStorage.getItem('profile'))
-            this.checkFlag(flag, this.id, user.sub)
-          }
+          footer: 'Challenge by ' + this.author
         })
       }
     }

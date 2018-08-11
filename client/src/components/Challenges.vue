@@ -1,12 +1,8 @@
 <template>
   <div class="container">
     <br>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" v-if="authenticated">
-        <strong>It looks like you're not logged in.</strong> Without logging in, you won't be able to solve any challenges.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <login-warning v-if="!authenticated">
+    </login-warning>
       <table cellpadding="10">
         <tbody>
             <tr>
@@ -239,12 +235,13 @@
             </tr>
         </tbody>
     </table>
-    <p> Flags will always be obvious once identified, and will usually be in the form: flag{sUp3r_5ecret_f1ag} </p>
+    <h4> Flags will always be obvious once identified, and will usually be in the form: flag{sUp3r_5ecret_f1ag} </h4>
   </div>
 </template>
 
 <script>
 import ChallengeCard from './ChallengeCard.vue'
+import Warning from './Warning.vue'
 import ChallengeService from '@/services/ChallengeService'
 import UserService from '@/services/UserService'
 var lock = require('../Auth/lock.js')
@@ -252,11 +249,13 @@ var lock = require('../Auth/lock.js')
 export default {
   name: 'challenges',
   components: {
-    'challenge-card': ChallengeCard
+    'challenge-card': ChallengeCard,
+    'login-warning': Warning
   },
   data () {
     // if a user logs in while on challenges page, update solved list
     lock.notifier.on('authChange', () => {
+      this.isAuthenticated()
       this.getSolved()
     })
     return {
@@ -280,11 +279,7 @@ export default {
     this.$on('recalculate_solved', () => {
       this.getSolved()
     })
-
-    var user = localStorage.getItem('profile')
-    if (typeof user !== 'undefined' && user != null) {
-      this.authenticated = true
-    }
+    this.isAuthenticated()
   },
   methods: {
     async getChallenges () {
@@ -408,6 +403,14 @@ export default {
             break
         }
       }
+    },
+    isAuthenticated () {
+      var user = localStorage.getItem('profile')
+      if (typeof user !== 'undefined' && user != null) {
+        this.authenticated = true
+      } else {
+        this.authenticated = false
+      }
     }
   }
 }
@@ -430,9 +433,5 @@ table td:first-child {
 
 table td:last-child {
     border-right: none;
-}
-
-h3 {
-    color: #2c3e50
 }
 </style>
