@@ -12,7 +12,28 @@ var AUTH_CONFIG = {
 
 var options = {
   autofocus: true,
-  autoclose: true
+  autoclose: true,
+  allowShowPassword: true,
+  languageDictionary: {
+    emailInputPlaceholder: 'something@youremail.com',
+    title: 'Introsec'
+  },
+  additionalSignUpFields: [{
+    name: 'user_name',
+    placeholder: 'User name',
+    validator: function (address) {
+      return {
+        valid: address.length >= 1,
+        hint: 'Please enter a user name' // optional
+      }
+    }
+  },
+  {
+    name: 'mailing_list',
+    placeholder: 'Add me to the mailing list',
+    type: 'checkbox',
+    prefill: 'true'
+  }]
 }
 
 const lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, options)
