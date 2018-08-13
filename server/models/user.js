@@ -16,7 +16,8 @@ var userSchema = new mongoose.Schema(
     sub: String,
     points: Number,
     solved: [ solveSchema ],
-    updated_at: Date
+    updated_at: Date,
+    user_name: String
   },
   {
     collection: 'users'

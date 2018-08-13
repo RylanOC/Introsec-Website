@@ -10,6 +10,7 @@ var AUTH_CONFIG = {
   apiUrl: 'https://introsec.auth0.com/api/v2/'
 }
 
+// configure the login GUI
 var options = {
   autofocus: true,
   autoclose: true,
@@ -24,7 +25,7 @@ var options = {
     validator: function (address) {
       return {
         valid: address.length >= 1,
-        hint: 'Please enter a user name' // optional
+        hint: 'Please enter a user name'
       }
     }
   },
@@ -47,10 +48,6 @@ async function updateDB (profile) {
   var user = await UserService.getUser({
     sub: profile.sub
   })
-
-  console.log(user.data.user)
-  console.log('found: ' + user.data.found)
-
   // if the user is new, add them to database so we can track points
   if (!user.data.found) {
     await UserService.addUser({
@@ -60,7 +57,8 @@ async function updateDB (profile) {
       sub: profile.sub,
       points: 0,
       solved: [],
-      updated_at: profile.updated_at
+      updated_at: profile.updated_at,
+      user_name: profile['https://intro.rpdis.ec/user_name']
     })
   }
 }

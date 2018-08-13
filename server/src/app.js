@@ -185,6 +185,7 @@ app.post('/adduser', (req, res) => {
 		nickname: req.body.nickname,
 		sub: req.body.sub,
 		updated_at: req.body.updated_at
+		user_name: req.body.user_name
 	})
 
 	new_user.save(function (error) {
@@ -248,12 +249,13 @@ app.get('/getsolved/:user_id', function(req, res) {
 
 // load cert + private key so we can serve our app over https
 // (assumes cert files are in /server/cert)
+/*
 var fullchain = fs.readFileSync('./cert/fullchain.pem')
 var privkey = fs.readFileSync('./cert/privkey.pem')
 const options = {
 	cert: fullchain,
 	key: privkey 
 }
-
-app.listen(process.env.PORT || 8081)
-https.createServer(options, app).listen(8443)
+*/
+app.listen(process.env.PORT || 8443)
+//https.createServer(options, app).listen(8443)
