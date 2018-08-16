@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const https = require('https')
 const fs = require('fs')
+const path = require('path')
 
 const app = express()
 app.use(morgan('combined'))
@@ -11,8 +12,8 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(require('helmet')())
 
-// serve static content for challenges/etc.
-app.use(express.static('media')) // logo
+// serve static challenges
+app.use('/challenges', express.static(path.join(__dirname + '/challenges')));
 
 const mongodb_conn_module = require('./mongodbConnModule');
 var db = mongodb_conn_module.connect();
