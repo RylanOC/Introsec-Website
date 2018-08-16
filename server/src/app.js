@@ -184,7 +184,7 @@ app.post('/adduser', (req, res) => {
 		name: req.body.name,
 		nickname: req.body.nickname,
 		sub: req.body.sub,
-		updated_at: req.body.updated_at
+		updated_at: req.body.updated_at,
 		user_name: req.body.user_name
 	})
 

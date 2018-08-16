@@ -3,6 +3,16 @@
     <br>
     <login-warning v-if="!authenticated">
     </login-warning>
+
+    <b-alert :show="dismissCountDown"
+             dismissible
+             fade
+             variant="danger"
+             @dismissed="dismissCountDown=0"
+             @dismiss-count-down="countDownChanged">
+      Wrong flag!
+    </b-alert>
+
       <table cellpadding="10">
         <tbody>
             <tr>
@@ -271,17 +281,30 @@ export default {
       csawChallenges: [],
       miscChallenges: [],
       physicalChallenges: [],
-      authenticated: false
+      authenticated: false,
+      dismissSecs: 1.5,
+      dismissCountDown: 0
     }
   },
   mounted () {
     this.getChallenges()
+    // re render solved challenges on solve
     this.$on('recalculate_solved', () => {
       this.getSolved()
+    })
+    // show alert when an incorrect flag is submitted
+    this.$on('invalid_flag', () => {
+      this.showAlert()
     })
     this.isAuthenticated()
   },
   methods: {
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+    showAlert () {
+      this.dismissCountDown = this.dismissSecs
+    },
     async getChallenges () {
       var response
       response = await ChallengeService.fetchWebChallenges()

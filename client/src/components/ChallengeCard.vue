@@ -49,6 +49,8 @@ export default {
       var valid = response.data.valid
       if (valid === 0) {
         this.$parent.$emit('recalculate_solved')
+      } else {
+        this.$parent.$emit('invalid_flag')
       }
       return valid
     },
