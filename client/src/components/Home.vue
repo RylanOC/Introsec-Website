@@ -2,7 +2,7 @@
   <div class="container">
     <h1 id="rpisec-introductory-meetings">RPISEC Introductory Meetings</h1>
     <h2 id="overview">Overview</h2>
-    <p>Our objective is to give students a broad security background. We give weekly lectures on a wide range of topics, and run a semester long <a href="https://en.wikipedia.org/wiki/Capture_the_flag#Computer_security">Capture the Flag competition</a> to train anyone interested.</p>
+    <p>Our objective is to give students a broad security background. We give weekly lectures on a wide range of topics, and run a semester long <a style="color: #42b983;" href="https://en.wikipedia.org/wiki/Capture_the_flag#Computer_security">Capture the Flag competition</a> to train anyone interested.</p>
     <p>No security background is necessary to participate! However, completion of CS1 or a high familiarity with computers will be very helpful. Most of our meetings stand independently, and we will announce when a topic builds on another and requires extra experience.</p>
     <h2 id="meetings">Meetings</h2>
     <p>Fall 2018 meetings will be held every Tuesday 7PM to 10PM in Union 3510 + 3511. We'll try to arrive a little early, so feel free to stop by before the meeting starts if you have any questions or just want to chat!</p>
@@ -22,7 +22,7 @@
     </ul>
     <p>To join the mailing list, register an account on this website.</p>
     <h2 id="important-tools">Important tools</h2>
-    <p>We will go over any specific tools necessary for each topic, but we also provide links to common tools for reference on our <a href="/tools">tools page.</a></p>
+    <p>We will go over any specific tools necessary for each topic, but we also provide links to common tools for reference on our <a style="color: #42b983;" href="/tools">tools page.</a></p>
     <hr />
     <h2 id="how-do-i-join">How do I join?</h2>
     <p>First, register an account on this website. An account will give you access to our online CTF and will put you on our announcement mailing list. If you do not get a weekly announcement email, write to us by email or on IRC - we probably forgot to check for new accounts.</p>
