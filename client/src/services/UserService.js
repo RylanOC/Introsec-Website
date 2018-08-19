@@ -11,5 +11,9 @@ export default {
 
   async getSolved (params) {
     return Api().get('getSolved/' + params.user_id)
+  },
+
+  getUsers (params) {
+    return Api().get('getUsers/')
   }
 }

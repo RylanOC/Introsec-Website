@@ -16,6 +16,20 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "../src/assets/main.css";
+<style>
+  #app {
+  background-color: #27282A;
+  background-image: url(assets/binary-background.svg);
+  background-size:180mm;
+  background-position:center;
+  background-repeat: repeat;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #dfdfd5;
+}
+ 
+.container {
+    background: #27282A;
+}
 </style>

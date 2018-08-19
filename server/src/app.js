@@ -214,6 +214,18 @@ app.get('/getuser/:sub', function (req, res) {
 	})
 })
 
+// returns a list of all registered users
+app.get('/getUsers', (req, res) => {
+	User.find({}, 
+		'solved user_name id',
+		function (error, users) {
+	  if (error) { console.error(error); }
+	  res.send({
+			users: users
+		})
+	}).sort({_id:1})
+})
+
 // returns a list of challenge objects that a given user has solved
 app.get('/getsolved/:user_id', function(req, res) {
 	var db = req.db
