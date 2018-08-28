@@ -167,10 +167,19 @@ app.post('/check', (req, res) => {
 							}
 						  console.log('solved: ' + success);
 					}
-				).then(function () {
-					console.log('DONE WITH CHECK FLAG')
-					console.log('---------------------------------------------------')		
-				})
+				)
+				// Then update the points
+				User.findOneAndUpdate(
+					{sub: req.body.user_id}, 
+					{$inc: {points: challenge.points}},
+					{fields: 'points', new: true},
+					function(err, success) {
+							if (err) {
+								console.log(err);
+							}
+						  console.log('solved: ' + success);
+					}
+				)
 			}
 			res.send({
 				valid: diff,
@@ -186,7 +195,8 @@ app.post('/adduser', (req, res) => {
 		nickname: req.body.nickname,
 		sub: req.body.sub,
 		updated_at: req.body.updated_at,
-		user_name: req.body.user_name
+		user_name: req.body.user_name,
+		points: req.body.points
 	})
 
 	new_user.save(function (error) {
@@ -217,7 +227,7 @@ app.get('/getuser/:sub', function (req, res) {
 // returns a list of all registered users
 app.get('/getUsers', (req, res) => {
 	User.find({}, 
-		'solved user_name id',
+		'solved user_name points id',
 		function (error, users) {
 	  if (error) { console.error(error); }
 	  res.send({

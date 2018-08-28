@@ -10,7 +10,7 @@
       		</tr>
       	</thead>
         <tbody>
-            <tr v-for="(user, index) in users" :key="index">
+            <tr v-for="(user, index) in users">
             	<th scope="row">
             		<h4> {{index + 1}} </h4>
             	</th>
@@ -18,9 +18,7 @@
               		<h4> {{user.user_name}} </h4>
                 </td>
                 <td>
-                	<points
-                	v-bind:solved="user.solved">
-                	</points>
+                	<h4> {{user.points}} </h4>
                 </td> 
             </tr>
         </tbody>
@@ -43,13 +41,18 @@ export default {
     }
   },
   mounted () {
-    this.getChallenges()
+    this.getUsers()
   },
   methods: {
-    async getChallenges () {
+    async getUsers () {
       var response
       response = await UserService.getUsers()
-      this.users = response.data.users
+      var usersUnsorted = response.data.users
+      this.users = usersUnsorted.sort(this.comparePoints)
+      console.log(this.users)
+    },
+    comparePoints (user1, user2) {
+      return (user1.points < user2.points)
     }
   }
 }
